@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "lLbLg44qNA3Ws2+4UKv6J+SehcNBBR4UX4vkNuECh1k=",
+  "Source": "WorkBuddyServer",
+  "BasePath": "_content/WorkBuddyServer",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

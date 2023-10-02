@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\HP\\source\\repos\\WorkBuddy\\WorkBuddyServer\\WorkBuddyServer.csproj": {}
+    "C:\\Users\\HP\\Desktop\\Bài Tập\\web\\PAEC\\WorkBuddy\\server\\WorkBuddyServer\\WorkBuddyServer.csproj": {}
   },
   "projects": {
-    "C:\\Users\\HP\\source\\repos\\WorkBuddy\\WorkBuddyServer\\WorkBuddyServer.csproj": {
+    "C:\\Users\\HP\\Desktop\\Bài Tập\\web\\PAEC\\WorkBuddy\\server\\WorkBuddyServer\\WorkBuddyServer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\HP\\source\\repos\\WorkBuddy\\WorkBuddyServer\\WorkBuddyServer.csproj",
+        "projectUniqueName": "C:\\Users\\HP\\Desktop\\Bài Tập\\web\\PAEC\\WorkBuddy\\server\\WorkBuddyServer\\WorkBuddyServer.csproj",
         "projectName": "WorkBuddyServer",
-        "projectPath": "C:\\Users\\HP\\source\\repos\\WorkBuddy\\WorkBuddyServer\\WorkBuddyServer.csproj",
+        "projectPath": "C:\\Users\\HP\\Desktop\\Bài Tập\\web\\PAEC\\WorkBuddy\\server\\WorkBuddyServer\\WorkBuddyServer.csproj",
         "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\HP\\source\\repos\\WorkBuddy\\WorkBuddyServer\\obj\\",
+        "outputPath": "C:\\Users\\HP\\Desktop\\Bài Tập\\web\\PAEC\\WorkBuddy\\server\\WorkBuddyServer\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -43,6 +43,22 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.22, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.22, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[6.0.22, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.5.0, )"

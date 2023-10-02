@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\WorkBuddyServer.props" />
+</Project>
