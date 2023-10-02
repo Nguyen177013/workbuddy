@@ -1,5 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using WorkBuddyServer.Data;
+using WorkBuddyServer.Entity;
+using WorkBuddyServer.Repository;
+using WorkBuddyServer.Repository.IMP;
+using WorkBuddyServer.Service;
+using WorkBuddyServer.Service.IMP;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +20,14 @@ builder.Services.AddEntityFrameworkNpgsql().AddDbContext<ApplicationDbContext>(o
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+
+builder.Services.AddScoped<IRepository<User>, Repository<User>>();
+builder.Services.AddScoped<IRepository<Workout>, Repository<Workout>>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IWorkoutService, WorkoutService>();
+
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -25,6 +38,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
