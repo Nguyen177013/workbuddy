@@ -10,5 +10,6 @@ namespace WorkBuddyServer.Repository
         IEnumerable<TEntity> GetAll();
         bool Update(TEntity entity);
         TEntity Find(params Expression<Func<TEntity, bool>>[] filter);
+        IEnumerable<TEntity> GetAllIncluding(params Expression<Func<TEntity, object>>[] includeProperties);
     }
 }

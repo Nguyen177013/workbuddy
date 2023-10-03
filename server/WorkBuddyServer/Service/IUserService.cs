@@ -10,8 +10,9 @@ namespace WorkBuddyServer.Service
         bool Delete(int id);
         User Get(int id);
         IEnumerable<User> GetAll();
-        bool Update(User user);
+        bool Update(int userId, UserDTO userDto);
         User FindUser(UserDTO userDTO);
-        bool CheckUserLogin(UserDTO userDTO);
+        User CheckUserLogin(UserDTO userDTO);
+        public AuthResponse GenerateToken(User user);
     }
 }

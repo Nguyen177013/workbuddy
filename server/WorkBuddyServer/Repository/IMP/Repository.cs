@@ -75,5 +75,17 @@ namespace WorkBuddyServer.Repository.IMP
             }
             return query.FirstOrDefault();
         }
+
+        public IEnumerable<TEntity> GetAllIncluding(params Expression<Func<TEntity, object>>[] includeProperties)
+        {
+            IQueryable<TEntity> query = _entities;
+
+            foreach (var includeProperty in includeProperties)
+            {
+                query = query.Include(includeProperty);
+            }
+
+            return query.ToList();
+        }
     }
 }

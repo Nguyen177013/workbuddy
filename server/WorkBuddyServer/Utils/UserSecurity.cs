@@ -48,7 +48,7 @@ namespace WorkBuddyServer.Utils
                     new Claim("UserName", user.UserName),
                     new Claim("UserId", user.Id.ToString()),
                 }),
-                Expires = DateTime.UtcNow.AddHours(1),
+                Expires = DateTime.UtcNow.AddMinutes(15),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256)
             };
 

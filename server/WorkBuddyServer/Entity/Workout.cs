@@ -16,6 +16,6 @@ namespace WorkBuddyServer.Entity
         [Required]
         public int Load { get; set; }
 
-        public User? User { get; set; }
+        public virtual User User { get; set; } = new User();
     }
 }

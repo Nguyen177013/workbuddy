@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WorkBuddyServer.DTO;
 using WorkBuddyServer.Entity;
@@ -26,9 +25,10 @@ namespace WorkBuddyServer.Controllers
         public IActionResult GetUsers()
         {
             var users = _userService.GetAll();
-            return Ok(users);
+            var usersDto = _mapper.Map<IEnumerable<UserDTO>>(users);
+            return Ok(usersDto);
         }
-        
+
         [HttpGet("{userId}")]
         public IActionResult GetUser(int userId)
         {
@@ -39,7 +39,8 @@ namespace WorkBuddyServer.Controllers
         public IActionResult AddUser([FromBody] UserDTO userDTO)
         {
             User user = _userService.FindUser(userDTO);
-            if(user != null) {
+            if (user != null)
+            {
                 ModelState.AddModelError("AddUser", "User already exist");
                 return BadRequest(ModelState);
             }
@@ -52,11 +53,10 @@ namespace WorkBuddyServer.Controllers
             }
             return Ok("User had been added");
         }
-        [HttpPatch("UpdateUser")]
-        public IActionResult UpdateUser([FromBody] UserDTO userDto)
+        [HttpPatch("UpdateUser/{userId}")]
+        public IActionResult UpdateUser(int userId, [FromBody] UserDTO userDto)
         {
-            User userMap = _mapper.Map<User>(userDto);
-            bool result = _userService.Update(userMap);
+            bool result = _userService.Update(userId, userDto);
             if (!result)
             {
                 ModelState.AddModelError("UpdateUser", "Something went wrong");
@@ -78,12 +78,13 @@ namespace WorkBuddyServer.Controllers
         [HttpPost("Login")]
         public IActionResult Login([FromBody] UserDTO userDTO)
         {
-            var checkUser = _userService.FindUser(userDTO);
-            if (checkUser != null)
+            var user = _userService.CheckUserLogin(userDTO);
+            if (user != null)
             {
-                
+                var token = _userService.GenerateToken(user);
+                return Ok(token);
             }
-            return Ok();
+            return Ok(new { message = "Password or Username incorrect" });
         }
     }
 }

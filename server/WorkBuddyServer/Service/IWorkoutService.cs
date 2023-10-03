@@ -8,7 +8,7 @@ namespace WorkBuddyServer.Service
         bool Add(Workout workout);
         bool Delete(int id);
         Workout Get(int id);
-        IEnumerable<Workout> GetAll();
+        IEnumerable<Workout> GetAll(int userId);
         bool Update(Workout workout);
     }
 }

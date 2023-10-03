@@ -22,8 +22,13 @@ namespace WorkBuddyServer.Service.IMP
             var result = _userRepository.Add(user);
             return result;
         }
-        public bool Update(User user)
+        public bool Update(int userId, UserDTO userDto)
         {
+            var user = Get(userId);           
+            //lazy to mapp
+            user.Password = userSecurity.MD5Hash(userDto.Password);
+            user.UserName = userDto.UserName;
+            user.Email = userDto.Email;
             return _userRepository.Update(user);
         }
         public bool Delete(int id)
@@ -36,25 +41,34 @@ namespace WorkBuddyServer.Service.IMP
         }
         public IEnumerable<User> GetAll()
         {
-            return _userRepository.GetAll();
+            return _userRepository.GetAll().OrderBy(p=> p.Id);
         }
 
         public User FindUser(UserDTO userDTO)
         {
             return _userRepository.Find(user => user.UserName.TrimEnd().ToUpper() == userDTO
-            .UserName.TrimEnd().ToUpper() && user.Email.TrimEnd().ToUpper() == userDTO
+            .UserName.TrimEnd().ToUpper() || user.Email.TrimEnd().ToUpper() == userDTO
             .Email.TrimEnd().ToUpper());
         }
-        public bool CheckUserLogin(UserDTO userDTO)
+        public User CheckUserLogin(UserDTO userDTO)
         {
             User user = _userRepository.Find(user =>user.UserName.TrimEnd().ToUpper() == userDTO
             .UserName.TrimEnd().ToUpper());
             if(user == null)
             {
-                return false;
+                return null;
             }
             bool checkUser = userSecurity.CompareMD5Hash(userDTO.Password, user.Password);
-            return checkUser;
+            if(checkUser)
+            {
+                return user;
+            }
+            return null;
+        }
+        public AuthResponse GenerateToken(User user)
+        {
+            AuthResponse authResponse = new AuthResponse { AccessToken = userSecurity.CreateToken(user), ExpireDate = DateTime.UtcNow.AddMinutes(15) };
+            return authResponse;
         }
     }
 }

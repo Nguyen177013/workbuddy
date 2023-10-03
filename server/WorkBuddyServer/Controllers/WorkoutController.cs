@@ -1,12 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using WorkBuddyServer.Entity;
 using WorkBuddyServer.Service;
-using WorkBuddyServer.Service.IMP;
-
 namespace WorkBuddyServer.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Policy = "AuthorizeOnly")]
     public class WorkoutController : Controller
     {
         private readonly IWorkoutService _workoutService;
@@ -20,7 +21,9 @@ namespace WorkBuddyServer.Controllers
         [ProducesResponseType(200, Type = typeof(IEnumerable<Workout>))]
         public IActionResult GetWorkouts()
         {
-            var workouts = _workoutService.GetAll();
+            var user = User.Identity as ClaimsIdentity;
+            var id = user?.FindFirst("UserId")?.Value ?? "";
+            var workouts = _workoutService.GetAll(Int32.Parse(id));
             return Ok(workouts);
         }
         [HttpGet("{workoutId}")]

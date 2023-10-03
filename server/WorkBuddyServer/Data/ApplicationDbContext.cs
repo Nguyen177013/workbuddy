@@ -9,14 +9,12 @@ namespace WorkBuddyServer.Data
         {
             
         }
-        public DbSet<User>? Users { get; set; }
-        public DbSet<Workout>? Workouts { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Workout> Workouts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Workout>()
-                .HasOne(x => x.User)
-                .WithMany(x => x.Workouts);
+ 
         }
     }
 }

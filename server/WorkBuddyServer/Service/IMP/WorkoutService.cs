@@ -1,4 +1,5 @@
-﻿using WorkBuddyServer.Entity;
+﻿using Microsoft.AspNetCore.Identity;
+using WorkBuddyServer.Entity;
 using WorkBuddyServer.Repository;
 
 namespace WorkBuddyServer.Service.IMP
@@ -27,7 +28,7 @@ namespace WorkBuddyServer.Service.IMP
         {
             return _workoutRepository.FindById(id);
         }
-        public IEnumerable<Workout> GetAll()
+        public IEnumerable<Workout> GetAll(int userId)
         {
             return _workoutRepository.GetAll();
         }
